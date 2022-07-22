@@ -4,12 +4,9 @@ using namespace std;
 class Sudoku
 {
 public:
-    void solveSudoku(vector<vector<char>> &board)
+    bool solveSudoku(vector<vector<char>> &board)
     {
-        if (solve(board) == false)
-        {
-            cout << "Sudoku is not possible";
-        }
+        return solve(board);
     }
     //-----------------------------------------------------------------------------
     bool solve(vector<vector<char>> &board)
@@ -83,38 +80,41 @@ int main()
         {'.', '.', '.', '.', '8', '.', '.', '7', '9'},
     };
 
-    solver.solveSudoku(board);
-
-    for (int i = 0; i < board.size(); i++)
+    if (solver.solveSudoku(board))
     {
-        /* code */
-        if (i == 0)
+        for (int i = 0; i < board.size(); i++)
         {
-            cout << "- - - - - - - - - - - - - - - - - - - - - - - - - ";
+            /* code */
+            if (i == 0)
+            {
+                cout << "- - - - - - - - - - - - - - - - - - - - - - - - - ";
+                cout << endl;
+                cout << endl;
+            }
+            cout << "|   ";
+            for (int j = 0; j < board[i].size(); j++)
+            {
+
+                if (j == 3 or j == 6)
+                    cout << "|   ";
+
+                cout << board[i][j] << "   ";
+            }
+            cout << "|";
             cout << endl;
+            if (i == 2 or i == 5)
+            {
+                cout << endl;
+                cout << "- - - - - - - - - - - - - - - - - - - - - - - - - ";
+                cout << endl;
+            }
+
             cout << endl;
         }
-        cout << "|   ";
-        for (int j = 0; j < board[i].size(); j++)
-        {
-
-            if (j == 3 or j == 6)
-                cout << "|   ";
-
-            cout << board[i][j] << "   ";
-        }
-        cout << "|";
-        cout << endl;
-        if (i == 2 or i == 5)
-        {
-            cout << endl;
-            cout << "- - - - - - - - - - - - - - - - - - - - - - - - - ";
-            cout << endl;
-        }
-
-        cout << endl;
+        cout << "- - - - - - - - - - - - - - - - - - - - - - - - - ";
     }
-    cout << "- - - - - - - - - - - - - - - - - - - - - - - - - ";
+    else
+        cout << "Sudoku is Not Possible";
 
     // cout << "Donee";
 }
